@@ -1,0 +1,19 @@
+{
+  "name": "contact_app",
+  "version": "1.0.0",
+  "description": "this is contact manager app build using rest api express and mongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shijin65/Contact_Manager_App.git"
+  },
+  "author": "shijin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shijin65/Contact_Manager_App/issues"
+  },
+  "homepage": "https://github.com/Shijin65/Contact_Manager_App#readme"
+}
