@@ -15,6 +15,7 @@ const showone =(req,res)=>{
 //CREATE A CONTACT
 
 const createcontact =(req,res)=>{
+    console.log("the new contact is :",req.body)
     res.status(201).json({message:"post is possible"});
     res.end()
 }
@@ -23,7 +24,7 @@ const createcontact =(req,res)=>{
 //UPDATE CONTACT
 
 const editcontact =(req,res)=>{
-    res.status(200).json({message:`updation is available ${req.params.id}`});
+    res.status(201).json({message:`updation is available for ${req.params.id}`});
     res.end()
 }
 
@@ -31,7 +32,7 @@ const editcontact =(req,res)=>{
 //DELETE THE CONTACT
 
 const deletecontact =(req,res)=>{
-    res.status(400).json({message:`content can be deleted${req.params.id}`});
+    res.status(400).json({message:`content ${req.params.id} can be deleted`});
     res.end()
 }
 

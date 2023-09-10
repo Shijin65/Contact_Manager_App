@@ -1,25 +1,17 @@
 const express = require ("express");
 const router = express.Router();
 const {showall ,showone ,createcontact,editcontact,deletecontact } =require("../contact_controler/contact_controler")
-//GET 
 
-router.route("/").get(showall);
 
-//GET SINGLE CONTACT
+//GET //POST CONTACT
 
-router.route("/:id").get(showone);
+router.route("/").get(showall).post(createcontact);
 
-//POST CONTACT
 
-router.route("/").post(createcontact);
 
-//UPDATE CONTACT
+//GET SINGLE CONTACT//UPDATE CONTACT//DELETE THE CONTACT
 
-router.route("/:id").put(editcontact);
-
-//DELETE THE CONTACT
-
-router.route("/:id").delete(deletecontact);
+router.route("/:id").get(showone).put(editcontact).delete(deletecontact);
 
 
 module.exports= router;
