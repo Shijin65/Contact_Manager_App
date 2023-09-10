@@ -1,40 +1,25 @@
 const express = require ("express");
 const router = express.Router();
-
+const {showall ,showone ,createcontact,editcontact,deletecontact } =require("../contact_controler/contact_controler")
 //GET 
 
-router.route("/").get((req,res)=>{
-    res.status(200).json({message:"this is home page from route"});
-    res.end()
-});
+router.route("/").get(showall);
 
 //GET SINGLE CONTACT
 
-router.route("/:id").get((req,res)=>{
-    res.status(200).json({message:`get the single contact ${req.params.id}`});
-    res.end()
-});
+router.route("/:id").get(showone);
 
 //POST CONTACT
 
-router.route("/").post((req,res)=>{
-    res.status(201).json({message:"post is possible"});
-    res.end()
-});
+router.route("/").post(createcontact);
 
 //UPDATE CONTACT
 
-router.route("/:id").put((req,res)=>{
-    res.status(200).json({message:`updation is available ${req.params.id}`});
-    res.end()
-});
+router.route("/:id").put(editcontact);
 
 //DELETE THE CONTACT
 
-router.route("/:id").delete((req,res)=>{
-    res.status(400).json({message:`content can be deleted${req.params.id}`});
-    res.end()
-});
+router.route("/:id").delete(deletecontact);
 
 
 module.exports= router;
