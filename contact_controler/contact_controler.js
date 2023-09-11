@@ -16,6 +16,11 @@ const showone =(req,res)=>{
 
 const createcontact =(req,res)=>{
     console.log("the new contact is :",req.body)
+    const {name,email,number} = req.body;
+    if (!name || ! email || !number) {
+        res.status(404);
+        throw new Error("all the fields a mantatory")
+    }
     res.status(201).json({message:"post is possible"});
     res.end()
 }
