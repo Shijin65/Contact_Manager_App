@@ -4,14 +4,15 @@ const Contact = require("../model/contact_models")
 
 
 //GET ALL CONTACT
-
+//ONLY VALID USER CAN ACCESS
 const showall = asyncHanler(async(req,res)=>{
-    const allContacts = await Contact.find();
+    const allContacts = await Contact.find({user_id : req.user.id});
     res.status(200).json(allContacts);
     res.end()
 });
 
 //GET SINGLE CONTACT
+//ONLY VALID USER CAN ACCESS
 
 const showone = asyncHanler(async (req,res)=>{
     
@@ -21,12 +22,11 @@ const showone = asyncHanler(async (req,res)=>{
         throw new Error("contact not found")
     }
     res.status(200).json(contact);
-    res.end();
-    
-    
+    res.end();  
 });
 
 //CREATE A CONTACT
+//ONLY VALID USER CAN ACCESS
 
 const createcontact = asyncHanler(async (req,res)=>{
     console.log("the new contact is :",req.body);
@@ -39,15 +39,14 @@ const createcontact = asyncHanler(async (req,res)=>{
         name,
         email,
         phone,
+        user_id :req.user.id
     })
     res.status(201).json(contact);
     res.end();
 });
 
-
-
-
 //UPDATE CONTACT
+//ONLY VALID USER CAN ACCESS
 
 const editcontact = asyncHanler(async (req,res)=>{
 
@@ -70,6 +69,7 @@ const editcontact = asyncHanler(async (req,res)=>{
 
 
 //DELETE THE CONTACT
+//ONLY VALID USER CAN ACCESS
 
 const deletecontact = asyncHanler(async (req,res)=>{
     const contact = await Contact.findById(req.params.id);
