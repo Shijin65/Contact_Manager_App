@@ -54,13 +54,13 @@ const loginuser = asyncHanler(async (req, res) => {
     const accesstoken = jwt.sign(
                             {
                                 user: {
-                                username: User.username,
-                                email: User.email,
-                                id: User.id,
+                                username: user.username,
+                                email: user.email,
+                                id: user.id,
                                 },
                             },
                                 process.env.SECERT_ACCESSTOKEN,
-                            {   expiresIn: "1m" }
+                            {   expiresIn: "5m" }
     );
     res.status(200).json( accesstoken );
     
@@ -73,7 +73,9 @@ const loginuser = asyncHanler(async (req, res) => {
 
 // /api/user/current
 const currentuser = asyncHanler(async (req, res) => {
-  res.status(200).json({ title: "current user" });
+
+
+  res.status(200).json(req.user);
   res.end();
 });
 
