@@ -9,8 +9,9 @@ const app = express();
 const port=process.env.PORT;
 
 app.use(express.json());
-app.use("/api/contact", require("./routes/contact_route"))
-app.use(errorHandler)
+app.use("/api/contact", require("./routes/contact_route"));
+app.use("/api/user", require("./routes/user_route"));
+app.use(errorHandler);
 
 
 app.listen(port,()=>{
