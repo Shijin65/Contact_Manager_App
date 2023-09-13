@@ -4,7 +4,7 @@ const userschema = mongoose.Schema({
     username:{
         type : String,
         required:[true, 'name is required'],
-        unique :[true,"the user name already taken"]
+        unique :[true,'the username already taken']
     },
     email:{
         type : String,
@@ -19,4 +19,4 @@ const userschema = mongoose.Schema({
 },{
     timestamps:true,
 })
-module.exports=mongoose.model("user",userschema);
+module.exports=mongoose.model("User",userschema);
