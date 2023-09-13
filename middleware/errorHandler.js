@@ -12,7 +12,7 @@ const errorHandler = (err, req, res, next) => {
 
     case constants.UNAUTHORIZED:
       res.json({
-        title: "unauthorized",
+        title: "AUTHORIZATION FAILED",
         message: err.message,
         stacktrace: err.stackt,
       });
@@ -21,7 +21,7 @@ const errorHandler = (err, req, res, next) => {
 
       case constants.FORBITTEN:
       res.json({
-        title: "unauthorized",
+        title: "forbitten",
         message: err.message,
         stacktrace: err.stackt,
       });
@@ -29,14 +29,14 @@ const errorHandler = (err, req, res, next) => {
       break;
       case constants.NOT_FOUND:
         res.json({
-            title: "not found",
+            title: "SOME THING WENT WRONG",
             message: err.message,
             stacktrace: err.stackt,
         });
 
         case constants.SERVER_ERRROR:
         res.json({
-            title: "not found",
+            title: "server error",
             message: err.message,
             stacktrace: err.stackt,
         });
