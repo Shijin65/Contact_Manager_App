@@ -12,7 +12,6 @@ const showall = asyncHanler(async(req,res)=>{
 });
 
 
-
 //GET SINGLE CONTACT
 //ONLY VALID USER CAN ACCESS
 const showone = asyncHanler(async (req,res)=>{
@@ -51,7 +50,6 @@ const createcontact = asyncHanler(async (req,res)=>{
 
 //UPDATE CONTACT
 //ONLY VALID USER CAN ACCESS
-
 const editcontact = asyncHanler(async (req,res)=>{
 
     const contact = await Contact.findById(req.params.id);
@@ -85,6 +83,14 @@ const deletecontact = asyncHanler(async (req,res)=>{
         res.status(404)
         throw new Error("contact not found")
     }
+
+     //checking if the logined user user_id and user_id assigned to contact in database are the same 
+    //so the user can only access the contact which id is assigned to. 
+    if (contact.user_id.toString() !== req.user.id ){
+        res.status(400);
+        throw new Error("one user cannot access other contact");
+    }
+    
     try {
          await Contact.deleteOne({ _id: req.params.id });
             res.status(400).json({"DELETED_CONTACT":contact});
@@ -93,7 +99,6 @@ const deletecontact = asyncHanler(async (req,res)=>{
         console.log(error)
     }
        
-   
 });
 
 
