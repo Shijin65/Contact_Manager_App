@@ -1,21 +1,13 @@
 const express = require('express');
+const { registeruser, loginuser, currentuser } = require('../contact_controler/user_controler');
 const router = express.Router();
 
 
-router.post("/register",(req,res)=>{
-    res.status(200).json({title:"registration is available" });
-    res.end();
-});
+router.post("/register", registeruser);
 
-router.post("/login",(req,res)=>{
-    res.status(200).json({title:"login user" });
-    res.end();
-});
+router.post("/login", loginuser);
 
-router.get("/current",(req,res)=>{
-    res.status(200).json({title:"currnet will showup here" });
-    res.end();
-});
+router.get("/current", currentuser);
 
 
 module.exports =router;
