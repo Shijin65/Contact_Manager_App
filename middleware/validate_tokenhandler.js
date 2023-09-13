@@ -6,19 +6,19 @@ const validuser = asyncHandler(async(req,res,next)=>{
     let authHeader = req.headers.authorization ||req.headers.Authorization
     if (authHeader && authHeader.startsWith("Bearer") ) {
         token = authHeader.split(" ")[1];
-        jwt.verify(token,process.env.SECERT_ACCESSTOKEN,(err,decoded)=>{
+        jwt.verify(token , process.env.SECERT_ACCESSTOKEN,(err,decoded)=>{
             if (err) {
                 res.status(401);
                 throw new Error("token validation failed");
             }
-            console.log(decoded)
+            req.user = decoded.user
             next();
         })
     }
-    // else{
-    //     res.status(401);
-    //     throw new Error("token validation failed");
-    // }
+    if (!token){
+        res.status(401);
+        throw new Error("user is not authorized or token is missing");
+    }
 })
 
 module.exports = validuser;
