@@ -36,7 +36,7 @@ const errorHandler = (err, req, res, next) => {
 
         case constants.SERVER_ERRROR:
         res.json({
-            title: "server error",
+            title: "BAD REQUEST",
             message: err.message,
             stacktrace: err.stackt,
         });

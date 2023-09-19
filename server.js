@@ -7,13 +7,13 @@ const dotenv = require("dotenv").config();
 connectDB();
 const app = express();
 const port=process.env.PORT;
-// const corsOptions = {
-//     Access:"http://localhost:8000",
-//     origin: 'http://localhost:8000/',
-//     methods: 'POST',
-//     allowedHeaders: 'Content-Type,Authorization',
-//     credentials: true, // Enable cookies and HTTP authentication headers
-//   };
+const corsOptions = {
+    Access:"http://localhost:8000",
+    origin: 'http://localhost:8000/',
+    methods: 'POST',
+    allowedHeaders: 'Content-Type,Authorization',
+    credentials: true, // Enable cookies and HTTP authentication headers
+  };
 
 app.use(express.json());
 app.use(require("cors")());  
