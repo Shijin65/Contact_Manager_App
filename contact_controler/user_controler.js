@@ -65,8 +65,9 @@ const loginuser = asyncHanler(async (req, res) => {
     res.status(200).json( accesstoken );
     
   }else{
-    res.status(401);
+    res.status(401).json( error );
     throw new Error("auth error")
+    
   }
   res.end();
 });
