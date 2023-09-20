@@ -9,14 +9,15 @@ const registeruser = asyncHanler(async (req, res) => {
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
-    res.status(404);
+    res.status(404).json({error : "all the fields a mantatory... "})
     throw new Error("all the fields a mantatory");
   }
 
   const useravailable = await User.findOne({ email });
 
   if (useravailable) {
-    res.status(400);
+    res.status(400).json({error : "The email already used... "})
+
     throw new Error("user already exist");
   }
 
@@ -62,10 +63,10 @@ const loginuser = asyncHanler(async (req, res) => {
                                 process.env.SECERT_ACCESSTOKEN,
                             {   expiresIn: "5m" }
     );
-    res.status(200).json( accesstoken );
+    res.status(200).json( accesstoken  );
     
   }else{
-    res.status(401).json( error );
+    res.status(401).json( {error:"check the email and password "} );
     throw new Error("auth error")
     
   }
