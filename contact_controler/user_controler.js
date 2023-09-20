@@ -47,7 +47,7 @@ const loginuser = asyncHanler(async (req, res) => {
   }
 
   const user = await User.findOne({ email });
-  console.log(user);
+  // console.log(user);
 //   console.log(user.username);
 
   if (user && (await bcrypt.compare(password, user.password))) {
@@ -63,7 +63,7 @@ const loginuser = asyncHanler(async (req, res) => {
                                 process.env.SECERT_ACCESSTOKEN,
                             {   expiresIn: "5m" }
     );
-    res.status(200).json( accesstoken  );
+    res.status(200).json( {accesstoken , user});
     
   }else{
     res.status(401).json( {error:"check the email and password "} );
