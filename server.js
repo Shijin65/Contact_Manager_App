@@ -15,6 +15,6 @@ app.use("/api/user", require("./routes/user_route"));
 app.use(errorHandler);
 
 
-app.listen(port,()=>{
+if(connectDB){app.listen(port,()=>{
     console.log(`the port is running at the port :${port}`)
-})
+})}

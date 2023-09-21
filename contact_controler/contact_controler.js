@@ -30,20 +30,34 @@ const showone = asyncHanler(async (req,res)=>{
 //CREATE A CONTACT
 //ONLY VALID USER CAN ACCESS
 const createcontact = asyncHanler(async (req,res)=>{
-    console.log("the new contact is :",req.body);
+    try {
+        console.log("the new contact is :",req.body);
     const {name,email,phone} = req.body;
     if (!name || ! email || !phone) {
-        res.status(404);
+        res.status(404).json({error:"all the fields a mantatory"})
         throw new Error("all the fields a mantatory")
     }
-    const contact = await Contact.create({
+
+    const numberexist = await Contact.findOne({ phone });
+
+    if (!numberexist) {
+        const contact = await Contact.create({
         name,
         email,
         phone,
         user_id :req.user.id
     })
     res.status(201).json(contact);
+    }else{
+    res.status(400).json({error:"this number is already saved"});
+        
+    }
+    
     res.end();
+    } catch (error) {
+        res.status(403).json({error:""})
+    }
+    
 });
 
 
