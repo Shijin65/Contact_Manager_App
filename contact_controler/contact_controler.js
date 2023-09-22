@@ -6,9 +6,14 @@ const Contact = require("../model/contact_models")
 //GET ALL CONTACT
 //ONLY VALID USER CAN ACCESS
 const showall = asyncHanler(async(req,res)=>{
-    const allContacts = await Contact.find({user_id : req.user.id});
-    res.status(200).json(allContacts);
-    res.end()
+    try {
+       const allContacts = await Contact.find({user_id : req.user.id});
+        res.status(200).json(allContacts);
+        res.end() 
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({error:"some thing went wronge"})
+    }
 });
 
 
@@ -39,8 +44,11 @@ const createcontact = asyncHanler(async (req,res)=>{
     }
 
     const numberexist = await Contact.findOne({ phone });
+    const emailexist = await Contact.findOne({ email});
+    const usernameexist = await Contact.findOne({ name });
 
-    if (!numberexist) {
+
+    if (!numberexist , !emailexist, !usernameexist ) {
         const contact = await Contact.create({
         name,
         email,
@@ -48,14 +56,23 @@ const createcontact = asyncHanler(async (req,res)=>{
         user_id :req.user.id
     })
     res.status(201).json(contact);
-    }else{
-    res.status(400).json({error:"this number is already saved"});
-        
+    }else if(numberexist ){
+        res.status(400).json({error:"this number is already saved"});
+    }
+    else if( emailexist ){
+        res.status(400).json({error:"this email is already used"});
+    }
+    else if( usernameexist ){
+        res.status(400).json({error:"this username already exist"});
+    }else
+    {
+    res.status(400).json({error:"something went wrong "});       
     }
     
     res.end();
     } catch (error) {
-        res.status(403).json({error:""})
+        console.log("error",error)
+        res.status(400).json(error)
     }
     
 });
