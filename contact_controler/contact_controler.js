@@ -124,7 +124,7 @@ const deletecontact = asyncHanler(async (req,res)=>{
     
     try {
          await Contact.deleteOne({ _id: req.params.id });
-            res.status(400).json({"DELETED_CONTACT":contact});
+            res.status(400).json({"DELETED_CONTACT":contact.name});
             res.end();
     } catch (error) {
         console.log(error)
