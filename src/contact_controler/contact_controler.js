@@ -4,7 +4,7 @@ const Contact = require("../model/contact_models")
 
 
 //GET ALL CONTACT
-//ONLY VALID USER CAN ACCESS
+//ONLY VALID USER CAN ACCESS/
 const showall = asyncHanler(async(req,res)=>{
     try {
        const allContacts = await Contact.find({user_id : req.user.id});
@@ -123,9 +123,12 @@ const deletecontact = asyncHanler(async (req,res)=>{
     }
     
     try {
-         await Contact.deleteOne({ _id: req.params.id });
-            res.status(400).json({"DELETED_CONTACT":contact.name});
-            res.end();
+        
+        await Contact.deleteOne({ _id: req.params.id });
+        const allContacts = await Contact.find({user_id : req.user.id});
+        // console.log("the user is ",req.user)
+        res.status(200).json({"DELETED_CONTACT":contact.name , newcont:allContacts});
+
     } catch (error) {
         console.log(error)
     }
