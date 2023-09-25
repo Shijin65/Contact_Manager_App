@@ -4,7 +4,7 @@ const Contact = require("../model/contact_models")
 
 
 //GET ALL CONTACT
-//ONLY VALID USER CAN ACCESS
+//ONLY VALID USER CAN ACCESS/
 const showall = asyncHanler(async(req,res)=>{
     try {
        const allContacts = await Contact.find({user_id : req.user.id});
