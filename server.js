@@ -1,6 +1,6 @@
 const express = require ("express");
-const errorHandler = require("./middleware/errorHandler");
-const connectDB = require("./Config/DBconnection");
+const errorHandler = require("./src/middleware/errorHandler");
+const connectDB = require("./src/Config/DBconnection");
 const dotenv = require("dotenv").config();
 // const cors = require("cors")
 
@@ -11,8 +11,8 @@ const port=process.env.PORT;
 
 app.use(express.json());
 app.use(require("cors")());  
-app.use("/api/contact", require("./routes/contact_route"));
-app.use("/api/user", require("./routes/user_route"));
+app.use("/api/contact", require("./src/routes/contact_route"));
+app.use("/api/user", require("./src/routes/user_route"));
 app.use(errorHandler);
 
 if(connectDB){app.listen(port,()=>{
